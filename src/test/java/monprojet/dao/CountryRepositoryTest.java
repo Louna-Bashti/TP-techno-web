@@ -43,4 +43,11 @@ public class CountryRepositoryTest {
         assertEquals(combienDePaysDansLeJeuDeTest, nombre, "On doit trouver 4 pays" );
     }
 
+    @Test
+    void laPopEstBienComptée() {
+        log.info("On vérifie que la population du pays France est bien égale à 12");
+        int population = countryDAO.populationDuPays(1);
+        assertEquals(12, population, "La population n'est pas bien calculée");
+    }
+
 }

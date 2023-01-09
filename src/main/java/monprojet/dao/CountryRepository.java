@@ -11,11 +11,11 @@ import monprojet.entity.Country;
 // This will be AUTO IMPLEMENTED by Spring 
 
 public interface CountryRepository extends JpaRepository<Country, Integer> {
-    @Query(value = "SELECT SUM(population) AS population" + "FROM City" + "INNER JOIN Country" + "WHERE Country.id = id", nativeQuery = true)
-    int populationDuPays(Integer id);
+    @Query(value = "SELECT SUM(population) " + " FROM City " + " WHERE Country_id = :identifiant ", nativeQuery = true)
+    int populationDuPays(Integer identifiant);
 
-    @Query(value = "", nativeQuery = true)
-    List<Country> countryNameAndPop();
+    @Query(value = "SELECT Country.nom AS name, SUM(CITY.population) AS pop FROM Country INNER JOIN City ON (Country.id = City.Country_id) GROUP BY Country.nom ", nativeQuery = true)
+    List<PopulationCountry> countryNameAndPop();
 
 
 
