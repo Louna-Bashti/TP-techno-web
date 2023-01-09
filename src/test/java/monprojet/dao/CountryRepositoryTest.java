@@ -1,5 +1,6 @@
 package monprojet.dao;
 
+import monprojet.dto.PopulationCountry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
@@ -19,6 +20,7 @@ public class CountryRepositoryTest {
 
     @Autowired
     private CountryRepository countryDAO;
+    private PopulationCountry countryDTO;
 
     @Test
     void lesNomsDePaysSontTousDifferents() {
@@ -48,6 +50,13 @@ public class CountryRepositoryTest {
         log.info("On vérifie que la population du pays France est bien égale à 12");
         int population = countryDAO.populationDuPays(1);
         assertEquals(12, population, "La population n'est pas bien calculée");
+    }
+
+    @Test
+    void lesPaysSontBienAjoutés() {
+        log.info("On vérifie qu'il y a bien le bon nombre de pays dans l'enregistrement");
+        int nombre = countryDAO.countryNameAndPop().size();
+        assertEquals(3, nombre, "Les pays n'ont pas été bien enregistrés dans le DTO");
     }
 
 }
